@@ -77,6 +77,11 @@ void Object::modify_position(float x, float y) {
     this->y = y;
 }
 
+void Object::move_with_velocity(sf::Time elapsed) {
+    x = x + vx*elapsed.asSeconds();
+    y = y + vy*elapsed.asSeconds();
+}
+
 void Object::modify_x(float x) {
     this->x = x;
 }

@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <utility>
 
 class Object {
@@ -49,6 +50,8 @@ class Object {
 
         //Modifiers
         void modify_position(float x, float y);
+
+        void move_with_velocity(sf::Time elapsed);
 
         void modify_x(float x);
 
