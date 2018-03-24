@@ -3,7 +3,7 @@
 
 class Object {
 
-    private:
+    protected:
         float h, w; //Size (h,w)
         float x, y; //Positions (x,y)
         float vx, vy; //Velocity

@@ -7,6 +7,7 @@
 
 class Ball : public Object {
     private:
+    float radi;
 
     public:
         //Constructors
@@ -14,4 +15,10 @@ class Ball : public Object {
 
         //Destructors
         ~Ball();
+
+        //Consultors
+        float get_radi();
+
+        //Modifiers
+        void modify_radi(float radi);
 };
