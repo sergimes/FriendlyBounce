@@ -1,4 +1,4 @@
-
+#include <SFML/Graphics.hpp>
 
 class Object {
 
@@ -12,6 +12,8 @@ class Object {
 
     public:
         //Constructors
+        Object();
+
         Object(float h, float w, float x, float y, float vx, float vy, float ax, float ay, sf::Color color);
 
         //Destructor
