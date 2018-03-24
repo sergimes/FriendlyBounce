@@ -14,7 +14,6 @@ class Player : public Object {
         int id; //The player's id
         string name; //The player's name
         unsigned int points; //The player's points
-        sf::Color color;
 
     public:
         //Constructors
