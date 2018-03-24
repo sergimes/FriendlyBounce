@@ -39,6 +39,7 @@ Player::Player(int playerId, int windowWidth, int windowHeight) : Object() {
         default:
             color = sf::Color(0,0,0,0);
             w = 0;
+            h = 0;
             break;
     };
 }
@@ -80,12 +81,47 @@ Player::Player(int playerId, string playerName, int windowWidth, int windowHeigh
         default:
             color = sf::Color(0,0,0,0);
             w = 0;
+            h = 0;
             break;
     };
 }
 
 Player::Player(int playerId, string playerName, sf::Color color, int windowWidth, int windowHeight) : Object(){
-
+    id = playerId;
+    name = playerName;
+    points = 0;
+    vx = vy = ax = ay = 0;
+    this->color = color;
+    switch(id){
+        case 1:
+            w = 200;
+            h = 50;
+            x = (windowWidth - w)/2;
+            y = 0;
+            break;
+        case 2:
+            w = 50;
+            h = 200;
+            x = windowWidth - w;
+            y = (windowHeight - h)/2;
+            break;
+        case 3:
+            w = 200;
+            h = 50;
+            x = (windowWidth - w)/2;
+            y = windowHeight - h;
+            break;
+        case 4:
+            w = 50;
+            h = 200;
+            x = 0;
+            y = (windowHeight - h)/2;
+            break;
+        default:
+            w = 0;
+            h = 0;
+            break;
+    };
 }
 
 //Destructor
