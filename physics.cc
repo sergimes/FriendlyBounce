@@ -35,9 +35,9 @@ void Physics::update_velocities(std::vector<Player> &players,
                                 int &n_balls,*/
                                 sf::Time &elapsed){
 
-    sf::Keyboard keys_left[4] = {sf::Keyboard::A,sf::Keyboard::Left,sf::Keyboard::H, sf::Keyboard::Numpad4};
+    sf::Keyboard::Key keys_left[4] = {sf::Keyboard::A,sf::Keyboard::Left,sf::Keyboard::H, sf::Keyboard::Numpad4};
 
-    sf::Keyboard keys_right[4] = {sf::Keyboard::D,sf::Keyboard::Right,sf::Keyboard::K, sf::Keyboard::Numpad6};
+    sf::Keyboard::Key keys_right[4] = {sf::Keyboard::D,sf::Keyboard::Right,sf::Keyboard::K, sf::Keyboard::Numpad6};
 
     //keys_left = {sf::Keyboard::A,sf::Keyboard::Left,sf::Keyboard::H, sf::Keyboard::Numpad4};
 
@@ -46,15 +46,30 @@ void Physics::update_velocities(std::vector<Player> &players,
     for(int i = 0; i < n_players; ++i){
 
         if(sf::Keyboard::isKeyPressed(keys_left[i])){
-            float actual_vy = players[i].get_vy();
-            float new_vy = actual_vy - players[i].get_ax() * elapsed.asSeconds();
-            players[i].modify_vy(new_vy);
+            if(i == 0 or i == 1){
+                float actual_vy = players[i].get_vy();
+                float new_vy = actual_vy - players[i].get_ay() * elapsed.asSeconds();
+                players[i].modify_vy(new_vy);
+            }
+            else{
+                float actual_vx = players[i].get_vx();
+                float new_vx = actual_vx - players[i].get_ax() * elapsed.asSeconds();
+                players[i].modify_vx(new_vx);
+            }
+
         }
 
         if(sf::Keyboard::isKeyPressed(keys_right[i])){
-            float actual_vy = players[i].get_vy();
-            float new_vy = actual_vy + players[i].get_ax() * elapsed.asSeconds();
-            players[i].modify_vy(new_vy);
+            if(i == 0 or i == 1){
+                float actual_vy = players[i].get_vy();
+                float new_vy = actual_vy + players[i].get_ay() * elapsed.asSeconds();
+                players[i].modify_vy(new_vy);
+            }
+            else{
+                float actual_vx = players[i].get_vx();
+                float new_vx = actual_vx + players[i].get_ax() * elapsed.asSeconds();
+                players[i].modify_vx(new_vx);
+            }
         }
 
         /*
