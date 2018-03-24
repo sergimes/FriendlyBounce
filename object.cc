@@ -13,6 +13,7 @@ Object::Object(float h, float w, float x, float y, float vx, float vy, float ax,
     this->vy = vy;
     this->ax = ax;
     this->ay = ay;
+    this->color = color;
 }
 
 Object::~Object() {
