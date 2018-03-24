@@ -18,6 +18,8 @@ class Player : public Object {
 
     public:
         //Constructors
+        Player();
+
         Player(int playerId, int windowWidth, int windowHeight);
 
         Player(int playerId, string playerName, int windowWidth, int windowHeight);

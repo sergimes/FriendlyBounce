@@ -2,6 +2,9 @@
 
 //Constructors
 
+Player::Player() {
+}
+
 Player::Player(int playerId, int windowWidth, int windowHeight) : Object() {
     id = playerId;
     name = "Player " + id;
