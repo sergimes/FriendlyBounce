@@ -1,29 +1,35 @@
 #include "game.hh"
 
-void Game::game(){
-    game_window.create(sf::VideoMode(600, 700), "Ant Simulator");
+void Game::Game(){
+    game_window.create(sf::VideoMode(600, 700), "Funny Bouncer");
     game_window.setPosition(sf::Vector2i(0,0));
 
-    player player1(1);
+    Player player1(1);
     players[0] = player1;
+
+    Player player2(2);
+    players[1] = player2;
+
+    Player player3(3);
+    players[2] = player3;
+
+    Player player4(4);
+    players[3] = player4;
 }
 
 void Game::gameLoop(){
-    while(gameWindow.isOpen()){
+    while(game_window.isOpen()){
 
         window_events();
 
         game_window.clear();
 
-        game_physics.update();
+        elapsed = clock.restart();
 
+        Physics::update(players, balls, elapsed);
         draw_game();
 
         display_game();
-
-        std::cout << ++frameCounter << std::endl;
-
-
     }
 }
 

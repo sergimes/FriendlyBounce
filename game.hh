@@ -1,5 +1,16 @@
-#include "player.hh"
-#include "ball.hh"
+#include <SFML/Graphics.hpp>
+
+#ifndef STATE_H
+#define STATE_H
+
+#include "Player.hh"
+#include "Ball.hh"
+#include <SFML/System.hpp>
+#include <vector>
+#include <iostream>
+
+#endif
+
 #include "physics.hh"
 
 class Game{
@@ -13,8 +24,11 @@ private:
     sf::RenderWindow game_window;
 
     Physics game_physics;
+
+    sf::Time elapsed;
+    sf::Clock clock;
 public:
-    void game();
+    Game();
 
     void game_loop();
 
