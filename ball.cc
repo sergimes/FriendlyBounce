@@ -8,10 +8,10 @@ Ball::~Ball() {
 
 }
 
-float get_radi() {
+float Ball::get_radi() {
     return radi;
 }
 
-void modify_radi(float radi) {
+void Ball::modify_radi(float radi) {
     this->radi = radi;
 }

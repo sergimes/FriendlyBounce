@@ -7,7 +7,7 @@
 
 class Ball : public Object {
     private:
-    float radi;
+        float radi;
 
     public:
         //Constructors
