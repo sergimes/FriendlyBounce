@@ -1,6 +1,10 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include"object.hh"
-#include<Color.hpp>
 #include<string>
+
+#endif
 
 using namespace std;
 
@@ -13,11 +17,11 @@ class Player : public Object {
 
     public:
         //Constructors
-        Player(int playerId);
+        Player(int playerId, int windowWidth, int windowHeight);
 
-        Player(int playerId, string playerName);
+        Player(int playerId, string playerName, int windowWidth, int windowHeight);
 
-        Player(int playerId, string playerName, sf::Color color);
+        Player(int playerId, string playerName, sf::Color color,  int windowWidth, int windowHeight);
 
         //Destructor
         ~Player();
