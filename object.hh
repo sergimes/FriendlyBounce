@@ -21,25 +21,25 @@ class Object {
         ~Object();
 
         //Consultors
-        pair<float,float> get_size();
+        std::pair<float,float> get_size();
 
         float get_h();
 
         float get_w();
 
-        pair<float,float> get_position();
+        std::pair<float,float> get_position();
 
         float get_x();
 
         float get_y();
 
-        pair<float,float> get_velocity();
+        std::pair<float,float> get_velocity();
 
         float get_vx();
 
         float get_vy();
 
-        pair<float,float> get_acceleration();
+        std::pair<float,float> get_acceleration();
 
         float get_ax();
 

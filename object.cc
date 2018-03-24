@@ -31,7 +31,7 @@ float Object::get_w() {
     return w;
 }
 
-pair<float,float> Object::get_position() {
+std::pair<float,float> Object::get_position() {
     return std::make_pair(x,y);
 }
 
@@ -43,7 +43,7 @@ float Object::get_y() {
     return y;
 }
 
-pair<float,float> Object::get_velocity() {
+std::pair<float,float> Object::get_velocity() {
     return std::make_pair(vx,vy);
 }
 
@@ -55,7 +55,7 @@ float Object::get_vy() {
     return vy;
 }
 
-pair<float,float> Object::get_acceleration() {
+std::pair<float,float> Object::get_acceleration() {
     return std::make_pair(ax,ay);
 }
 
