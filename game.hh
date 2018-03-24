@@ -1,25 +1,23 @@
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
+#include "physics.hh"
 
 #ifndef STATE_H
 #define STATE_H
 
-#include "Player.hh"
-#include "Ball.hh"
-#include <SFML/System.hpp>
+#include "player.hh"
+#include "ball.hh"
 #include <vector>
 #include <iostream>
 
 #endif
-
-#include "physics.hh"
 
 class Game{
 
 private:
     int n_players;
     int n_balls;
-    std::vector<player> players;
-    std::vector<ball> balls;
+    std::vector<Player> players;
+    std::vector<Ball> balls;
 
     sf::RenderWindow game_window;
 
@@ -28,7 +26,7 @@ private:
     sf::Time elapsed;
     sf::Clock clock;
 public:
-    Game();
+    Game(int n_players, int n_balls, int window_width, int window_height);
 
     void game_loop();
 
@@ -37,4 +35,4 @@ public:
     void draw_game();
 
     void display_game();
-}
+};

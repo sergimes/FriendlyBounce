@@ -1,23 +1,27 @@
 #include "game.hh"
 
-void Game::Game(){
-    game_window.create(sf::VideoMode(600, 700), "Funny Bouncer");
+Game::Game(int n_players, int n_balls, int window_width, int window_height){
+    game_window.create(sf::VideoMode(window_width, window_height), "Funny Bouncer");
     game_window.setPosition(sf::Vector2i(0,0));
 
-    Player player1(1);
-    players[0] = player1;
+    players = std::vector<Player> (4);
 
-    Player player2(2);
-    players[1] = player2;
+    players[0] = Player(1,window_width, window_height);
 
-    Player player3(3);
-    players[2] = player3;
 
-    Player player4(4);
-    players[3] = player4;
+    players[1] = Player(2,window_width, window_height);
+
+
+    players[2] = Player(3,window_width, window_height);
+
+
+    players[3] = Player(4,window_width, window_height);
+
+    this->n_players = n_players;
+    this->n_balls = n_balls;
 }
 
-void Game::gameLoop(){
+void Game::game_loop(){
     while(game_window.isOpen()){
 
         window_events();
@@ -26,7 +30,8 @@ void Game::gameLoop(){
 
         elapsed = clock.restart();
 
-        Physics::update(players, balls, elapsed);
+        Physics::update(players, n_players, balls, n_balls, elapsed);
+
         draw_game();
 
         display_game();
@@ -35,28 +40,34 @@ void Game::gameLoop(){
 
 void Game::window_events(){
     sf::Event event;
-    while (simulationWindow.pollEvent(event))
+    while (game_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed){
-            simulationWindow.close();
+            game_window.close();
         }
     }
 }
 
 void Game::draw_game(){
 
-    for(int i = 0; i <= n_players ; ++i){//Draw players
-        sf::RectangleShape player(sf::Vector2f(players[i].get_w, players[i].get_w));
-        player.setFillColor(players[i].get_color);
-        player.setPosition(players[i].get_x, players[i].get_y);
-        game_window->draw(player);
+    for(int i = 0; i < n_players ; ++i){//Draw players
+        sf::RectangleShape player(sf::Vector2f(players[i].get_w(), players[i].get_h()));
+        player.setFillColor(players[i].get_color());
+        player.setPosition(players[i].get_x(), players[i].get_y());
+
+
+        //sf::RectangleShape player(sf::Vector2f(50, 50));
+        //player.setFillColor(sf::Color::Green);
+        //player.setPosition(250, 250);
+
+        game_window.draw(player);
     }
 
-    for(int i = 0; i <= balls ; ++i){//Draw balls
-        sf::CircleShape ball(sf::Vector2f(balls[i].get_w, balls[i].get_w));
-        ball.setFillColor(balls[i].get_color);
-        ball.setPosition(balls[i].get_x, balls[i].get_y);
-        game_window->draw(ball);
+    for(int i = 0; i < n_balls ; ++i){//Draw balls
+        sf::CircleShape ball((balls[i].get_h())/2);
+        ball.setFillColor(balls[i].get_color());
+        ball.setPosition(balls[i].get_x(), balls[i].get_y());
+        game_window.draw(ball);
     }
 }
 

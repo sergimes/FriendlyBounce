@@ -3,13 +3,12 @@
 
 #include "player.hh"
 #include "ball.hh"
-#include <SFML/System.hpp>
 #include <vector>
 #include <iostream>
 
 #endif
 
-#include "Player.hh"
+#include <SFML/Window.hpp>
 
 class Physics{
 private:
@@ -17,7 +16,19 @@ private:
 
 public:
 
-    void update(std::vector<Player> &players,
-                std::vector<Ball> &balls,
-                sf::time &elapsed);
+    static void update(std::vector<Player> &players,
+                       int &n_players,
+                       std::vector<Ball> &balls,
+                       int &n_balls,
+                       sf::Time &elapsed);
+
+    static void update_positions(std::vector<Player> &players,
+                          int &n_players,
+                          std::vector<Ball> &balls,
+                          int &n_balls,
+                          sf::Time &elapsed);
+
+    static void update_velocities(std::vector<Player> &players,
+                           int &n_players,
+                           sf::Time &elapsed);
 };
