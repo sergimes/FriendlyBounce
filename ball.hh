@@ -13,7 +13,9 @@ class Ball : public Object {
         //Constructors
         Ball();
 
-        Ball(float radi);
+        Ball(float radi, int windowWidth, int windowHeight);
+
+        Ball(float radi, float x, float y);
 
         //Destructors
         ~Ball();
