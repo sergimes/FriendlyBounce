@@ -12,35 +12,35 @@ Player::Player(int playerId, int windowWidth, int windowHeight) : Object() {
     vx = vy = ax = ay = 0;
     switch(id){
         case 1:
-            color = sf::Color(255,255,0,255);
+            color = sf::Color(255,255,0);
             w = 200;
             h = 50;
             x = (windowWidth - w)/2;
             y = 0;
             break;
         case 2:
-            color = sf::Color(255,0,0,255);
+            color = sf::Color(255,0,0);
             w = 50;
             h = 200;
             x = windowWidth - w;
             y = (windowHeight - h)/2;
             break;
         case 3:
-            color = sf::Color(0,255,0,255);
+            color = sf::Color(0,255,0);
             w = 200;
             h = 50;
             x = (windowWidth - w)/2;
             y = windowHeight - h;
             break;
         case 4:
-            color = sf::Color(0,0,255,255);
+            color = sf::Color(0,0,255);
             w = 50;
             h = 200;
             x = 0;
             y = (windowHeight - h)/2;
             break;
         default:
-            color = sf::Color(0,0,0,0);
+            color = sf::Color(0,0,0);
             w = 0;
             h = 0;
             break;
@@ -54,35 +54,35 @@ Player::Player(int playerId, string playerName, int windowWidth, int windowHeigh
     vx = vy = ax = ay = 0;
     switch(id){
         case 1:
-            color = sf::Color(255,255,0,255);
+            color = sf::Color(255,255,0);
             w = 200;
             h = 50;
             x = (windowWidth - w)/2;
             y = 0;
             break;
         case 2:
-            color = sf::Color(255,0,0,255);
+            color = sf::Color(255,0,0);
             w = 50;
             h = 200;
             x = windowWidth - w;
             y = (windowHeight - h)/2;
             break;
         case 3:
-            color = sf::Color(0,255,0,255);
+            color = sf::Color(0,255,0);
             w = 200;
             h = 50;
             x = (windowWidth - w)/2;
             y = windowHeight - h;
             break;
         case 4:
-            color = sf::Color(0,0,255,255);
+            color = sf::Color(0,0,255);
             w = 50;
             h = 200;
             x = 0;
             y = (windowHeight - h)/2;
             break;
         default:
-            color = sf::Color(0,0,0,0);
+            color = sf::Color(0,0,0);
             w = 0;
             h = 0;
             break;
