@@ -4,6 +4,10 @@ Ball::Ball() : Object() {
 
 }
 
+Ball::Ball(float radi) : Object() {
+    this->radi = radi;
+}
+
 Ball::~Ball() {
 
 }

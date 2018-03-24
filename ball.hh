@@ -13,6 +13,8 @@ class Ball : public Object {
         //Constructors
         Ball();
 
+        Ball(float radi);
+
         //Destructors
         ~Ball();
 
