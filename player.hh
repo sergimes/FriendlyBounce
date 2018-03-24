@@ -1,10 +1,11 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include"object.hh"
-#include<string>
 
 #endif
+
+#include<string>
 
 using namespace std;
 
