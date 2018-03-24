@@ -29,6 +29,11 @@ public:
                           sf::Time &elapsed);
 
     static void update_velocities(std::vector<Player> &players,
-                           int &n_players,
-                           sf::Time &elapsed);
+                          int &n_players,
+                          sf::Time &elapsed);
+
+    void collision(std::vector<Player> &players, int &n_players,
+
+                          std::vector<Ball> &balls,
+                          int &n_balls);
 };

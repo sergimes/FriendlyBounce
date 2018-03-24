@@ -60,3 +60,19 @@ void Physics::update_velocities(std::vector<Player> &players,
         float new_vy = actual_vy - players[i].get_ax() * elapsed.asSeconds();
     }*/
 }
+
+void Physics::collision(std::vector<Player> &players,
+                        int &n_players,
+                        std::vector<Ball> &balls,
+                        int &n_balls) {
+    for (int i = 0; i < n_balls; ++i) {
+        for (int j = 0; i < n_players; ++j) {
+            ball_player_coll();
+        }
+    }
+
+    for (int i = 0; i < n_players; ++i) {
+        player_limits();
+    }
+
+}
