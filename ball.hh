@@ -23,6 +23,8 @@ class Ball : public Object {
         //Consultors
         float get_radi();
 
+        std::pair<float,float> get_center();
+
         //Modifiers
         void modify_radi(float radi);
 };

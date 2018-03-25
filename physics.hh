@@ -3,6 +3,7 @@
 
 #include "player.hh"
 #include "ball.hh"
+#include <math.h>
 #include <vector>
 #include <iostream>
 
@@ -20,7 +21,9 @@ public:
                        int &n_players,
                        std::vector<Ball> &balls,
                        int &n_balls,
-                       sf::Time &elapsed);
+                       sf::Time &elapsed,
+                       int windowWidth,
+                       int windowHeight);
 
     static void update_positions(std::vector<Player> &players,
                           int &n_players,
@@ -32,8 +35,22 @@ public:
                           int &n_players,
                           sf::Time &elapsed);
 
-    void collision(std::vector<Player> &players, int &n_players,
+    static void player_limits(Player &player, int windowWidth, int windowHeight);
 
+    static void ricochet(Ball &ball, std::pair<point,point> &arista);
+
+    static float min_distance(Ball &ball, std::pair<point,point> &arista);
+
+    static float cartesian_distance(point a, point b);
+
+    static std::pair<point,point> closer_arista(Player &player, Ball &ball);
+
+    static void ball_player_coll(Player &player, Ball &ball);
+
+    static void collision(std::vector<Player> &players,
+                          int &n_players,
                           std::vector<Ball> &balls,
-                          int &n_balls);
+                          int &n_balls,
+                          int windowWidth,
+                          int windowHeight);
 };

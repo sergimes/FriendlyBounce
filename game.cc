@@ -30,7 +30,7 @@ void Game::game_loop(){
 
         elapsed = clock.restart();
 
-        Physics::update(players, n_players, balls, n_balls, elapsed);
+        Physics::update(players, n_players, balls, n_balls, elapsed, game_window.getSize().x, game_window.getSize().y);
 
         draw_game();
 

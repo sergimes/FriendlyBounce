@@ -24,6 +24,10 @@ float Ball::get_radi() {
     return radi;
 }
 
+std::pair<float,float> Ball::get_center() {
+    return std::make_pair(x + radi, y + radi);
+}
+
 void Ball::modify_radi(float radi) {
     this->radi = radi;
 }

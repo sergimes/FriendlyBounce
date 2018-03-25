@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <utility>
+typedef std::pair<float,float> point;
 
 class Object {
 
@@ -28,19 +29,19 @@ class Object {
 
         float get_w();
 
-        std::pair<float,float> get_position();
+        point get_position();
 
         float get_x();
 
         float get_y();
 
-        std::pair<float,float> get_velocity();
+        point get_velocity();
 
         float get_vx();
 
         float get_vy();
 
-        std::pair<float,float> get_acceleration();
+        point get_acceleration();
 
         float get_ax();
 

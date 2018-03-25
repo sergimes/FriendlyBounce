@@ -20,7 +20,7 @@ Object::~Object() {
 
 }
 
-std::pair<float,float> Object::get_size() {
+point Object::get_size() {
     return std::make_pair(h,w);
 }
 
@@ -32,7 +32,7 @@ float Object::get_w() {
     return w;
 }
 
-std::pair<float,float> Object::get_position() {
+point Object::get_position() {
     return std::make_pair(x,y);
 }
 
@@ -44,7 +44,7 @@ float Object::get_y() {
     return y;
 }
 
-std::pair<float,float> Object::get_velocity() {
+point Object::get_velocity() {
     return std::make_pair(vx,vy);
 }
 
@@ -56,7 +56,7 @@ float Object::get_vy() {
     return vy;
 }
 
-std::pair<float,float> Object::get_acceleration() {
+point Object::get_acceleration() {
     return std::make_pair(ax,ay);
 }
 
