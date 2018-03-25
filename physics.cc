@@ -228,7 +228,7 @@ void Physics::ball_player_coll(Player &player, Ball &ball) {
     point vertex[2] = {player.get_position(), std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h())};
 
     srand (time(NULL));
-    float rnumb = ((rand() % 35)*0.01)-0.175; //random number between 0.0 and 0.25
+    float rnumb = ((rand() % 60)*0.01)-0.3; //random number between 0.0 and 0.25
 
 
     if ((center.first < vertex[1].first) and (center.first > vertex[0].first)) {

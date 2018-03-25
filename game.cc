@@ -20,7 +20,12 @@ Game::Game(int n_players, int n_balls, int window_width, int window_height){
     balls = std::vector<Ball> (1);
 
     balls[0] = Ball(10, window_width, window_height);
-    balls[0].modify_velocity(0, 100);
+
+    srand (time(NULL));
+    float rnumb = ((rand() % ((int)((2*M_PI)*100)))*0.01) - M_PI;
+    float vm = 300;
+
+    balls[0].modify_velocity(vm * cos(rnumb) , vm * sin(rnumb));
 
     this->n_players = n_players;
     this->n_balls = n_balls;
