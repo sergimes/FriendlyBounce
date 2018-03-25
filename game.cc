@@ -20,7 +20,7 @@ Game::Game(int n_players, int n_balls, int window_width, int window_height){
     balls = std::vector<Ball> (1);
 
     balls[0] = Ball(10, window_width, window_height);
-    balls[0].modify_velocity(0, 500);
+    balls[0].modify_velocity(0, 100);
 
     this->n_players = n_players;
     this->n_balls = n_balls;

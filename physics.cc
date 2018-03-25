@@ -226,25 +226,63 @@ void Physics::ball_player_coll(Player &player, Ball &ball) {
     
     point center = ball.get_center();
     point vertex[2] = {player.get_position(), std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h())};
-    
+
+    srand (time(NULL));
+    float rnumb = ((rand() % 35)*0.01)-0.175; //random number between 0.0 and 0.25
+
+
     if ((center.first < vertex[1].first) and (center.first > vertex[0].first)) {
-        if ((center.second < vertex[0].second) and (center.second < vertex[1].second)) {
+        if ((center.second < vertex[0].second) and (center.second < vertex[1].second)) {//Bottom Player Collision
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[1].first, vertex[0].second),vertex[0]));
-            if (minDis < ball.get_radi()) ball.modify_vy(-abs(ball.get_vy()));
+            if (minDis < ball.get_radi()) {
+                float vy = ball.get_vy();
+                float vx = ball.get_vx();
+                float vm = sqrt(pow(vx,2) + pow(vy,2));
+                float alfa = atan(vx/vy);
+                vy = vm * cos(alfa + rnumb);
+                vx = vm * sin(alfa + rnumb);
+                std::cout << vx << " " << vy << std::endl;
+                ball.modify_velocity(vx, -abs(vy));
+            }
         }
-        else if ((center.second > vertex[0].second) and (center.second > vertex[1].second)) {
+        else if ((center.second > vertex[0].second) and (center.second > vertex[1].second)) {//Top Player Collision
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[0].first, vertex[1].second),vertex[1]));
-            if (minDis < ball.get_radi()) ball.modify_vy(abs(ball.get_vy()));
+            if (minDis < ball.get_radi()) {
+                float vy = ball.get_vy();
+                float vx = ball.get_vx();
+                float vm = sqrt(pow(vx,2) + pow(vy,2));
+                float alfa = atan(vx/vy);
+                vy = vm * cos(alfa + rnumb);
+                vx = vm * sin(alfa + rnumb);
+                ball.modify_velocity(vx, abs(vy));
+            }
         }
     }
     else if ((center.second < vertex[1].second) and (center.second > vertex[0].second)) {
-        if ((center.first < vertex[0].first) and (center.first < vertex[1].first)) {
+        if ((center.first < vertex[0].first) and (center.first < vertex[1].first)) {//Right Player Collision
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[1].first, vertex[0].second),vertex[1]));
-            if (minDis < ball.get_radi()) ball.modify_vx(-abs(ball.get_vx()));
+            if (minDis < ball.get_radi()) {
+                float vy = ball.get_vy();
+                float vx = ball.get_vx();
+                float vm = sqrt(pow(vx,2) + pow(vy,2));
+                float alfa = atan(vy/vx);
+                vy = vm * sin(alfa + rnumb);
+                vx = vm * cos(alfa + rnumb);
+                ball.modify_velocity(-abs(vx), vy);
+            }
+
         }
-        else if ((center.first > vertex[0].first) and (center.first > vertex[1].first)) {
+        else if ((center.first > vertex[0].first) and (center.first > vertex[1].first)) {//Left Player Collision
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[0].first, vertex[1].second),vertex[0]));
-            if (minDis < ball.get_radi()) ball.modify_vx(abs(ball.get_vx()));
+            if (minDis < ball.get_radi()) {
+                float vy = ball.get_vy();
+                float vx = ball.get_vx();
+                float vm = sqrt(pow(vx,2) + pow(vy,2));
+                float alfa = atan(vy/vx);
+                vy = vm * sin(alfa + rnumb);
+                vx = vm * cos(alfa + rnumb);
+                ball.modify_velocity(abs(vx), vy);
+            }
         }
     }
 }
