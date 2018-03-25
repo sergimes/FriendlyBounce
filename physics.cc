@@ -14,6 +14,7 @@ void Physics::update(std::vector<Player> &players,
 
     update_velocities(players, n_players, /*balls, n_balls,*/ elapsed);
 
+
     collision(players, n_players, balls, n_balls, windowWidth, windowHeight);
 }
 
@@ -163,16 +164,18 @@ void Physics::player_limits(Player &player, int windowWidth, int windowHeight) {
 void Physics::ricochet(Ball &ball, std::pair<point,point> &arista) {
     point center = ball.get_center();
     if (center.first < arista.first.first) {
-          if (center.first < arista.second.first) ball.modify_vx(-ball.get_vx());
-          else ball.modify_vy(-ball.get_vy());
+          if (center.first < arista.second.first) ball.modify_vx(-abs(ball.get_vx()));
+          else if (center.second < arista.second.second) ball.modify_vy(-abs(ball.get_vy()));
+          else ball.modify_vy(abs(ball.get_vy()));
     }
     else {
-        if (center.first > arista.second.first) ball.modify_vx(-ball.get_vx());
-        else ball.modify_vy(-ball.get_vy());
+        if (center.first > arista.second.first) ball.modify_vx(abs(ball.get_vx()));
+        else if (center.second < arista.second.second) ball.modify_vy(-abs(ball.get_vy()));
+        else ball.modify_vy(abs(ball.get_vy()));
     }
 }
 
-float Physics::min_distance(Ball &ball, std::pair<point,point> &arista) {
+float Physics::min_distance(Ball &ball, std::pair<point,point> arista) {
     if (arista.first.first != arista.second.first) {
         return abs(ball.get_center().second - arista.first.second);
     }
@@ -181,27 +184,27 @@ float Physics::min_distance(Ball &ball, std::pair<point,point> &arista) {
     }
 }
 
-float Physics::cartesian_distance(point a, point b) {
-    return abs(a.first + b.first) + abs(a.second + b.second);
+float Physics::distance(point a, point b) {
+    return abs(a.first - b.first) + abs(a.second - b.second);
 }
 
 std::pair<point,point> Physics::closer_arista(Player &player, Ball &ball) {
     point center = ball.get_center();
 
     pair<float,point> min1, min2, aux;
-    min1.first = cartesian_distance(center, std::make_pair(player.get_x(), player.get_y()));
+    min1.first = distance(center, std::make_pair(player.get_x(), player.get_y()));
     min1.second = std::make_pair(player.get_x(), player.get_y());
-    min2.first = cartesian_distance(center,std::make_pair(player.get_x() + player.get_w(), player.get_y()));
+    min2.first = distance(center,std::make_pair(player.get_x() + player.get_w(), player.get_y()));
     min2.second = std::make_pair(player.get_x() + player.get_w(), player.get_y());
     if (min1.first > min2.first) swap(min1,min2);
-    aux.first = cartesian_distance(center,std::make_pair(player.get_x(), player.get_y() + player.get_h()));
+    aux.first = distance(center,std::make_pair(player.get_x(), player.get_y() + player.get_h()));
     aux.second = std::make_pair(player.get_x(), player.get_y() + player.get_h());
     if (min1.first > aux.first) {
         swap(min1,min2);
         min1 = aux;
     }
     else if (min2 > aux) min2 = aux;
-    aux.first = cartesian_distance(center,std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h()));
+    aux.first = distance(center,std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h()));
     aux.second = std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h());
     if (min1 > aux) {
         swap(min1,min2);
@@ -209,13 +212,41 @@ std::pair<point,point> Physics::closer_arista(Player &player, Ball &ball) {
     }
     else if (min2 > aux) min2 = aux;
 
+    std::cout << player.getId() << " " << (int) min1.second.first << " " << (int) min1.second.second << " " << (int) min2.second.first << " " << (int) min2.second.second << std::endl;
+
     return std::make_pair(min1.second, min2.second);
 }
 
 void Physics::ball_player_coll(Player &player, Ball &ball) {
+    /*
     std::pair<point,point> arista = closer_arista(player, ball);
     float dis = Physics::min_distance(ball, arista);
     if (ball.get_radi() >= dis) Physics::ricochet(ball, arista);
+    */
+    
+    point center = ball.get_center();
+    point vertex[2] = {player.get_position(), std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h())};
+    
+    if ((center.first < vertex[1].first) and (center.first > vertex[0].first)) {
+        if ((center.second < vertex[0].second) and (center.second < vertex[1].second)) {
+            float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[1].first, vertex[0].second),vertex[0]));
+            if (minDis < ball.get_radi()) ball.modify_vy(-abs(ball.get_vy()));
+        }
+        else if ((center.second > vertex[0].second) and (center.second > vertex[1].second)) {
+            float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[0].first, vertex[1].second),vertex[1]));
+            if (minDis < ball.get_radi()) ball.modify_vy(abs(ball.get_vy()));
+        }
+    }
+    else if ((center.second < vertex[1].second) and (center.second > vertex[0].second)) {
+        if ((center.first < vertex[0].first) and (center.first < vertex[1].first)) {
+            float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[1].first, vertex[0].second),vertex[1]));
+            if (minDis < ball.get_radi()) ball.modify_vx(-abs(ball.get_vx()));
+        }
+        else if ((center.first > vertex[0].first) and (center.first > vertex[1].first)) {
+            float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[0].first, vertex[1].second),vertex[0]));
+            if (minDis < ball.get_radi()) ball.modify_vx(abs(ball.get_vx()));
+        }
+    }
 }
 
 void Physics::collision(std::vector<Player> &players,
@@ -225,8 +256,8 @@ void Physics::collision(std::vector<Player> &players,
                         int windowWidth,
                         int windowHeight) {
     for (int i = 0; i < n_balls; ++i) {
-        for (int j = 0; i < n_players; ++j) {
-            ball_player_coll(players[i], balls[j]);
+        for (int j = 0; j < n_players; ++j) {
+            ball_player_coll(players[j], balls[i]);
         }
     }
 

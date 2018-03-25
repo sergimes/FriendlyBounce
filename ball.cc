@@ -8,6 +8,9 @@ Ball::Ball(float radi, int windowWidth, int windowHeight) : Object() {
     this->radi = radi;
     x = windowWidth/2 - radi;
     y = windowHeight/2 - radi;
+    color = sf::Color(255,255,0);
+    w = radi*2;
+    h = radi*2;
 }
 
 Ball::Ball(float radi, float x, float y) {

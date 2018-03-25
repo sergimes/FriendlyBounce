@@ -17,6 +17,11 @@ Game::Game(int n_players, int n_balls, int window_width, int window_height){
 
     players[3] = Player(4,window_width, window_height);
 
+    balls = std::vector<Ball> (1);
+
+    balls[0] = Ball(10, window_width, window_height);
+    balls[0].modify_velocity(0, 500);
+
     this->n_players = n_players;
     this->n_balls = n_balls;
 }
@@ -30,7 +35,10 @@ void Game::game_loop(){
 
         elapsed = clock.restart();
 
+
+
         Physics::update(players, n_players, balls, n_balls, elapsed, game_window.getSize().x, game_window.getSize().y);
+
 
         draw_game();
 
@@ -64,7 +72,7 @@ void Game::draw_game(){
     }
 
     for(int i = 0; i < n_balls ; ++i){//Draw balls
-        sf::CircleShape ball((balls[i].get_h())/2);
+        sf::CircleShape ball(balls[i].get_radi());
         ball.setFillColor(balls[i].get_color());
         ball.setPosition(balls[i].get_x(), balls[i].get_y());
         game_window.draw(ball);

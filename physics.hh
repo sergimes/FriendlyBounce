@@ -39,9 +39,9 @@ public:
 
     static void ricochet(Ball &ball, std::pair<point,point> &arista);
 
-    static float min_distance(Ball &ball, std::pair<point,point> &arista);
+    static float min_distance(Ball &ball, std::pair<point,point> arista);
 
-    static float cartesian_distance(point a, point b);
+    static float distance(point a, point b);
 
     static std::pair<point,point> closer_arista(Player &player, Ball &ball);
 
