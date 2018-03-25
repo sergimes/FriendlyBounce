@@ -22,10 +22,11 @@ Game::Game(int n_players, int n_balls, int window_width, int window_height){
     balls[0] = Ball(10, window_width, window_height);
 
     srand (time(NULL));
-    float rnumb = ((rand() % ((int)((2*M_PI)*100)))*0.01) - M_PI;
-    float vm = 300;
+    //float rnumb = ((rand() % ((int)((2*M_PI)*100)))*0.01) - M_PI;
+    //float vm = 200;
 
-    balls[0].modify_velocity(vm * cos(rnumb) , vm * sin(rnumb));
+    //balls[0].modify_velocity(vm * cos(rnumb) , vm * sin(rnumb));
+    balls[0].modify_velocity(-200, 0);
 
     this->n_players = n_players;
     this->n_balls = n_balls;

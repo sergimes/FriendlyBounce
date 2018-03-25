@@ -10,7 +10,7 @@ Player::Player(int playerId, int windowWidth, int windowHeight) : Object() {
     name = "Player " + id;
     points = 0;
     vx = vy = 0;
-    ax = ay = 1000;
+    ax = ay = 2000;
     switch(id){
         case 4:
             color = sf::Color(255,255,0);
@@ -53,7 +53,7 @@ Player::Player(int playerId, string playerName, int windowWidth, int windowHeigh
     name = playerName;
     points = 0;
     vx = vy = 0;
-    ax = ay = 1000;
+    ax = ay = 2000;
     switch(id){
         case 4:
             color = sf::Color(255,255,0);
@@ -96,7 +96,7 @@ Player::Player(int playerId, string playerName, sf::Color color, int windowWidth
     name = playerName;
     points = 0;
     vx = vy = 0;
-    ax = ay = 1000;
+    ax = ay = 2000;
     this->color = color;
     switch(id){
         case 4:
