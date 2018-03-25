@@ -79,6 +79,17 @@ void Physics::update_velocities(std::vector<Player> &players,
     }
 }
 
+void Physics::ball_limits(std::vector<Ball> &balls, int &n_balls, int windowWidth, int windowHeight) {
+    for (int i = 0; i < n_balls; ++i) {
+        if((balls[i].get_x() > windowWidth) or (balls[i].get_y() > windowHeight) or
+                (balls[i].get_x()+balls[i].get_w() < 0) or (balls[i].get_y()+balls[i].get_h() < 0)) {
+            balls.erase(balls.begin()+i);
+            --n_balls;
+            std::cout << n_balls << std::endl;
+        }
+    }
+}
+
 void Physics::player_limits(Player &player, int windowWidth, int windowHeight) {
     point position = player.get_position();
     if (position.first < 0 and player.get_vx() < 0) {player.modify_vx(0);}
@@ -154,7 +165,7 @@ void Physics::ball_player_coll(Player &player, Ball &ball) {
     point vertex[2] = {player.get_position(), std::make_pair(player.get_x() + player.get_w(), player.get_y() + player.get_h())};
 
     srand (time(NULL));
-    float rnumb = ((rand() % 60)*0.01)-0.3; //random number between 0.0 and 0.25
+    //float rnumb = ((rand() % 60)*0.01)-0.3; //random number between 0.0 and 0.25
 
 
     if ((center.first < vertex[1].first) and (center.first > vertex[0].first)) {
@@ -185,9 +196,7 @@ void Physics::ball_player_coll(Player &player, Ball &ball) {
         }
     }
     else if ((center.second < vertex[1].second) and (center.second > vertex[0].second)) {
-        std::cout << "Hey1" << std::endl;
         if ((center.first < vertex[0].first) and (center.first < vertex[1].first)) {//Right Player Collision
-            std::cout << "Hey2" << std::endl;
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[0].first, vertex[1].second),vertex[0]));
             if (minDis < ball.get_radi()) {
                 float vy = ball.get_vy();
@@ -201,9 +210,7 @@ void Physics::ball_player_coll(Player &player, Ball &ball) {
 
         }
         else if ((center.first > vertex[0].first) and (center.first > vertex[1].first)) {//Left Player Collision
-            std::cout << "Hey3" << std::endl;
             float minDis = min_distance(ball,std::make_pair(std::make_pair(vertex[1].first, vertex[0].second),vertex[1]));
-            std::cout << minDis << std::endl;
             if (minDis < ball.get_radi()) {
                 float vy = ball.get_vy();
                 float vx = ball.get_vx();
@@ -232,5 +239,7 @@ void Physics::collision(std::vector<Player> &players,
     for (int i = 0; i < n_players; ++i) {
         player_limits(players[i], windowWidth, windowHeight);
     }
+
+    ball_limits(balls, n_balls, windowWidth, windowHeight);
 
 }

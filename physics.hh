@@ -37,6 +37,7 @@ public:
     static void update_velocities(std::vector<Player> &players,
                           int &n_players,
                           sf::Time &elapsed);
+    static void ball_limits(std::vector<Ball> &ball, int &n_balls, int windowWidth, int windowHeight);
 
     static void player_limits(Player &player, int windowWidth, int windowHeight);
 
