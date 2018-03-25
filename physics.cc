@@ -42,9 +42,9 @@ void Physics::update_velocities(std::vector<Player> &players,
                                 int &n_balls,*/
                                 sf::Time &elapsed){
 
-    sf::Keyboard::Key keys_left[4] = {sf::Keyboard::A,sf::Keyboard::Left,sf::Keyboard::H, sf::Keyboard::Numpad4};
+    sf::Keyboard::Key keys_left[4] = {sf::Keyboard::W,sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::A};
 
-    sf::Keyboard::Key keys_right[4] = {sf::Keyboard::D,sf::Keyboard::Right,sf::Keyboard::K, sf::Keyboard::Numpad6};
+    sf::Keyboard::Key keys_right[4] = {sf::Keyboard::S,sf::Keyboard::Down,sf::Keyboard::Right, sf::Keyboard::D};
 
     for(int i = 0; i < n_players; ++i){
 
