@@ -13,7 +13,7 @@ Ball::Ball(float radi, int windowWidth, int windowHeight) : Object() {
     h = radi*2;
 }
 
-Ball::Ball(float radi, float x, float y) {
+Ball::Ball(float radi, float x, float y) : Object(){
     this->radi = radi;
     this->x = x - radi;
     this->y = y - radi;

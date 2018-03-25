@@ -34,13 +34,24 @@ Game::Game(int n_players, int n_balls, int window_width, int window_height){
 void Game::game_loop(){
     while(game_window.isOpen()){
 
+
+
         window_events();
 
         game_window.clear();
 
         elapsed = clock.restart();
+        struct timespec ts;
+        clock_gettime(CLOCK_MONOTONIC, &ts);
+        srand((time_t)ts.tv_nsec);
 
-
+        if(not (rand()%10)) {
+            balls.push_back(Ball(10, (int)game_window.getSize().x, (int)game_window.getSize().y));
+            float rnumb = ((rand() % ((int)((2*M_PI)*100)))*0.01) - M_PI;
+            float vm = 300;
+            balls[n_balls].modify_velocity(vm * cos(rnumb) , vm * sin(rnumb));
+            n_balls++;
+        }
 
         Physics::update(players, n_players, balls, n_balls, elapsed, game_window.getSize().x, game_window.getSize().y);
 
